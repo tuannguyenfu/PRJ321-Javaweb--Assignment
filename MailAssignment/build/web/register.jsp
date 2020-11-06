@@ -53,12 +53,12 @@
             <h2 class="design">Registration Form</h2>
             <form action="registerservlet" method="POST">
                 <table>
-                    <tr><td>Name:</td><td><input type="text" name="name"/></td></tr>
-                    <tr><td>Email:</td><td><input type="text" name="email"/></td></tr>
-                    <tr><td>Password:</td><td><input type="password" name="password"/></td></tr>
+                    <tr><td>Name:</td><td><input type="text" name="name" required/></td></tr>
+                    <tr><td>Email:</td><td><input type="text" name="email" required/></td></tr>
+                    <tr><td>Password:</td><td><input type="password" name="password" required/></td></tr>
                     <tr><td>Gender:</td><td><input id="gender1" type="radio" name="name" value="male"/>Male
                             <input id="gender2" type="radio"  name="gender" value="female">Female</td></tr>
-                    <tr><td>Date Of Birth:</td><td><input type="date" name="dob"/></td></tr>
+                    <tr><td>Date Of Birth:</td><td><input type="date" name="dob" required/></td></tr>
                     <tr><td>AddressLine:</td><td><textarea name="addressLine" rows="5" cols="15"></textarea></td></tr>
                     <tr><td>City:</td><td><input type="text" name="city"/></td></tr>
                     <tr><td>State:</td><td><input type="text" name="state"/></td></tr>
