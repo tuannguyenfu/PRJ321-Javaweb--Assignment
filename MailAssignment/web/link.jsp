@@ -13,11 +13,11 @@
     </head>
     <body>
         <a href="index.jsp">Home</a> |
-        <a href="inboxservlet">Inbox</a> |
-        <a href="composeservlet">Compose Mail</a> |
-        <a href="sentservlet">Sent Mail</a> |
+        <a href="inbox">inbox</a> |
+        <a href="compose">Compose Mail</a> |
+        <a href="sent">Sent Mail</a> |
         <a href="trashservlet">Trash</a> |
-        <a href="logoutservlet">Logout</a>
+        <a href="logout">Logout</a>
         <hr/>
     </body>
 </html>
