@@ -47,16 +47,23 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        
+        <% 
+            String save = "";
+            if (request.getAttribute("save") != null) {
+                save = request.getAttribute("save").toString();
+            }
+        %>
     </head>
     <body>
         <div class="inputform">
             <h2 class="design">Registration Form</h2>
-            <form action="registerservlet" method="POST">
+            <form action="register" method="POST">
                 <table>
                     <tr><td>Name:</td><td><input type="text" name="name" required/></td></tr>
                     <tr><td>Email:</td><td><input type="text" name="email" required/></td></tr>
                     <tr><td>Password:</td><td><input type="password" name="password" required/></td></tr>
-                    <tr><td>Gender:</td><td><input id="gender1" type="radio" name="name" value="male"/>Male
+                    <tr><td>Gender:</td><td><input id="gender1" type="radio" name="gender" value="male"/>Male
                             <input id="gender2" type="radio"  name="gender" value="female">Female</td></tr>
                     <tr><td>Date Of Birth:</td><td><input type="date" name="dob" required/></td></tr>
                     <tr><td>AddressLine:</td><td><textarea name="addressLine" rows="5" cols="15"></textarea></td></tr>
@@ -70,6 +77,7 @@
                     <tr><td colspan="2"><input id="submit" type="submit" value="register"/><input id="reset" type="reset" value="clear"/></td></tr>
                 </table>
             </form>
+            <%=save%>
         </div>
     </body>
 </html>

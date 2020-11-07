@@ -23,12 +23,13 @@ public class User {
     private String city;
     private String state;
     private String country;
+    private String contact;
     private Date registerDate;
 
     public User() {
     }
 
-    public User(int id, String name, String email, String password, String gender, Date dob, String addressLine, String city, String state, String country, Date registerDate) {
+    public User(int id, String name, String email, String password, String gender, Date dob, String addressLine, String city, String state, String country, String contact, Date registerDate) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -39,6 +40,7 @@ public class User {
         this.city = city;
         this.state = state;
         this.country = country;
+        this.contact = contact;
         this.registerDate = registerDate;
     }
 
@@ -120,6 +122,14 @@ public class User {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
     public Date getRegisterDate() {

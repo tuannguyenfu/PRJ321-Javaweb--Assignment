@@ -42,13 +42,19 @@
     }
 </style>
 
+<% 
+    String email = request.getAttribute("email").toString();
+    String pass = request.getAttribute("password").toString();
+    String remember = request.getAttribute("remember").toString();
+%>
+
 <div class="inputform" style="float: left;">
     <h2 class="design">Login Form</h2>
-    <form action="loginservlet" method="POST">
+    <form action="login" method="POST">
         <table>
-            <tr><td>Email:</td><td><input type="email" name="email" required/></td></tr>
-            <tr><td>Password:</td><td><input type="password" name="password" required/></td></tr>
-            <tr><td><label for="remember">Remember:</label></td><td><input id="remember" type="checkbox" name="remember"/></td></tr>
+            <tr><td>Email:</td><td><input type="email" name="email" value="<%=email%>" required/></td></tr>
+            <tr><td>Password:</td><td><input type="password" name="password" value="<%=pass%>" required/></td></tr>
+            <tr><td><label for="remember">Remember:</label></td><td><input id="remember" type="checkbox" name="remember" <%=remember%> value="1"/></td></tr>
             <tr>
                 <td colspan="2"><input id="login" type="submit" value="login"/></td>
             </tr>
