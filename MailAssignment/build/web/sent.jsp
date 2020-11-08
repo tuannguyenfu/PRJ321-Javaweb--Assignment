@@ -44,7 +44,8 @@
                 <% for (Message m : listOfSentMessage) {%>
                 <tr>
                     <td><%=m.getReceiver()%></td>
-                    <td><%=m.getSubject()%></td>
+                    <td><a href="detail?id=<%=m.getId()%>"><%=m.getSubject()%></a></td>
+                    <td><a href="trash?id=<%=m.getId()%>">trash</a></td>
                 </tr>
                 <% }%>
             </table>

@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <a href="index.jsp">Home</a> |
+        <a href="login">Home</a> |
         <a href="inbox">inbox</a> |
         <a href="compose">Compose Mail</a> |
         <a href="sent">Sent Mail</a> |

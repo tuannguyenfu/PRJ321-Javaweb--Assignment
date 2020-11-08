@@ -28,6 +28,18 @@
         <servlet-name>SentController</servlet-name>
         <servlet-class>Controller.SentController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DetailMessageController</servlet-name>
+        <servlet-class>Controller.DetailMessageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>Controller.LogoutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TrashController</servlet-name>
+        <servlet-class>Controller.TrashController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>test</servlet-name>
         <url-pattern>/test</url-pattern>
@@ -51,6 +63,18 @@
     <servlet-mapping>
         <servlet-name>SentController</servlet-name>
         <url-pattern>/sent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailMessageController</servlet-name>
+        <url-pattern>/detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TrashController</servlet-name>
+        <url-pattern>/trash</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
