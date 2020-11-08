@@ -42,10 +42,20 @@
     }
 </style>
 
-<% 
-    String email = request.getAttribute("email").toString();
-    String pass = request.getAttribute("password").toString();
-    String remember = request.getAttribute("remember").toString();
+<%
+    String email = "";
+    String pass = "";
+    String remember = "";
+    if (request.getAttribute("email") != null) {
+        email = request.getAttribute("email").toString();
+    }
+    if (request.getAttribute("password") != null) {
+        pass = request.getAttribute("password").toString();
+    }
+    if (request.getAttribute("remember") != null) {
+        remember = request.getAttribute("remember").toString();
+    }
+
 %>
 
 <div class="inputform" style="float: left;">

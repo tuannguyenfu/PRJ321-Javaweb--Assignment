@@ -28,6 +28,7 @@ public class MessageDAO {
      * @param receiver
      * @param subject
      * @param message
+     * @param messagedate
      * @return 1 if message was sent successfully, 0 if not
      */
     public int addOne(String sender, String receiver, String subject, String message, Date messagedate) {
@@ -35,7 +36,7 @@ public class MessageDAO {
         PreparedStatement ps = null;
         try {
             con = new DBContext().getConnection();
-            String sql = "INSERT INTO dbo.\"Message\"(sender, receiver, subject, message, messagedate ) VALUES (?,?,?,?, ?) ";
+            String sql = "INSERT INTO dbo.\"Message\"(sender, receiver, subject, message, messagedate ) VALUES (?,?,?,?,?) ";
             ps = con.prepareStatement(sql);
             ps.setString(1, sender);
             ps.setString(2, receiver);

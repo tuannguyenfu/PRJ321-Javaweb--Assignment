@@ -24,6 +24,10 @@
         <servlet-name>ComposeController</servlet-name>
         <servlet-class>Controller.ComposeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SentController</servlet-name>
+        <servlet-class>Controller.SentController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>test</servlet-name>
         <url-pattern>/test</url-pattern>
@@ -43,6 +47,10 @@
     <servlet-mapping>
         <servlet-name>ComposeController</servlet-name>
         <url-pattern>/compose</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SentController</servlet-name>
+        <url-pattern>/sent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

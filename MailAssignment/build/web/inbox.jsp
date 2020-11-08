@@ -38,13 +38,13 @@
         <div class="inbox">
             <table border="1">
                 <tr>
+                    <th>FROM</th>
                     <th>Subject</th>
-                    <th>Message</th>
                 </tr>
                 <% for (Message m : listOfInbox) {%>
                 <tr>
                     <td><%=m.getSender()%></td>
-                    <td><%=m.getMessage()%></td>
+                    <td><%=m.getSubject()%></td>
                 </tr>
                 <% } %>
             </table>

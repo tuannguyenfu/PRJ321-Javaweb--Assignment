@@ -38,7 +38,7 @@
                             </td>
                         </tr>
                         <tr> <td>Subject: </td>
-                            <td><input type="text" nane="subject"/></td>
+                            <td><input type="text" name="subject"/></td>
                         </tr>
                         <tr>
                             <td colspan="2">Message:</td>

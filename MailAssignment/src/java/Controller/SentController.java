@@ -6,11 +6,10 @@
 package Controller;
 
 import DAL.MessageDAO;
-import DAL.UserDAO;
+import Model.Message;
 import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,9 +19,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author tuann
+ * @author Tuan Nguyen
  */
-public class ComposeController extends HttpServlet {
+public class SentController extends HttpServlet {
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -39,14 +38,15 @@ public class ComposeController extends HttpServlet {
         //Use session to get User login
         User u = (User) session.getAttribute("user");
         if (u != null) {
-            List<String> listOfUserToSend = new UserDAO().listEmailSend(u.getEmail());
 
-            request.setAttribute("listsendemail", listOfUserToSend);
-            request.getRequestDispatcher("compose.jsp").forward(request, response);
+            //Get list of inbox of user
+            List<Message> listOfSentMessage = new MessageDAO().listSentOfEmail(u.getEmail());
+            request.setAttribute("listofsent", listOfSentMessage);
+            //Forward to inbox.jsp
+            request.getRequestDispatcher("sent.jsp").forward(request, response);
         } else {
             response.sendRedirect("index.jsp");
         }
-
     }
 
     /**
@@ -61,26 +61,6 @@ public class ComposeController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        //Get user login from session
-        HttpSession session = request.getSession();
-        if (session != null) {
-            User u = (User) session.getAttribute("user");
-            //Get data from compose form
-            String sender = u.getEmail();
-            String receiver = request.getParameter("to");
-            String subject = request.getParameter("subject");
-            String message = request.getParameter("message");
-            Date messageDate = getDateSqlNow();
-            
-            System.out.println(subject);
-            //Insert into DB
-            int save = new MessageDAO().addOne(sender, receiver, subject, message, messageDate);
-            if (save == 1) {
-                response.sendRedirect("sent");
-            }
-        } else {
-            response.sendRedirect("index.jsp");
-        }
     }
 
     /**
@@ -92,9 +72,5 @@ public class ComposeController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    public Date getDateSqlNow() {
-        return new Date(new java.util.Date().getTime());
-    }
 
 }

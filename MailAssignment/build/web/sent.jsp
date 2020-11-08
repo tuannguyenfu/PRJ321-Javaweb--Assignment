@@ -1,7 +1,7 @@
 <%-- 
-    Document   : inbox
-    Created on : Nov 7, 2020, 1:38:43 PM
-    Author     : tuann
+    Document   : sent
+    Created on : Nov 8, 2020, 3:57:35 PM
+    Author     : Tuan Nguyen
 --%>
 
 <%@page import="Model.Message"%>
@@ -20,11 +20,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        
-        <% 
-            List<Message> listOfInbox = (List<Message>) request.getAttribute("listofinbox");
-        %>
     </head>
+    <%
+        List<Message> listOfSentMessage = (List<Message>) request.getAttribute("listofsent");
+    %>
+
     <body>
         <!-- header -->
         <div class="header"> 
@@ -33,23 +33,23 @@
         <div>
             <%@include file="link.jsp" %>
         </div>
-        
+
         <!-- Body -->
         <div class="inbox">
             <table border="1">
                 <tr>
-                    <th>FROM</th>
+                    <th>To</th>
                     <th>Subject</th>
                 </tr>
-                <% for (Message m : listOfInbox) {%>
+                <% for (Message m : listOfSentMessage) {%>
                 <tr>
-                    <td><%=m.getSender()%></td>
+                    <td><%=m.getReceiver()%></td>
                     <td><%=m.getSubject()%></td>
                 </tr>
-                <% } %>
+                <% }%>
             </table>
         </div>
-        
+
         <!-- Footer -->
         <div class="footer">
             <%@include file="footer.jsp" %>

@@ -84,7 +84,6 @@ public class LoginController extends HttpServlet {
             //Create a session for user input
             HttpSession session = request.getSession();
             session.setAttribute("user", u);
-            session.setMaxInactiveInterval(10);
 
             //Check if user click remember
             if (remember != null) {

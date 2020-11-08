@@ -9,7 +9,6 @@ import DAL.MessageDAO;
 import Model.Message;
 import Model.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,9 +22,6 @@ import javax.servlet.http.HttpSession;
  */
 public class InboxController extends HttpServlet {
 
-
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -38,10 +34,10 @@ public class InboxController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session != null) {
-            //Use session to get User login
-            User u = (User) session.getAttribute("user");
-            
+        //Use session to get User login
+        User u = (User) session.getAttribute("user");
+        if (u != null) {
+
             //Get list of inbox of user
             List<Message> listOfInbox = new MessageDAO().listInboxOfEmail(u.getEmail());
             request.setAttribute("listofinbox", listOfInbox);
@@ -63,7 +59,7 @@ public class InboxController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     /**
