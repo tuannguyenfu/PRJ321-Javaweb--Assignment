@@ -24,6 +24,7 @@ public class UserDAO {
 
     /**
      * INSERT USER INTO DATABASE
+     *
      * @param name
      * @param email
      * @param password
@@ -58,6 +59,65 @@ public class UserDAO {
             ps.setString(9, country);
             ps.setString(10, contact);
             ps.setDate(11, registerDate);
+            ps.executeUpdate();
+            save = 1;
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return save;
+    }
+    
+    /**
+     * Update info of user to DB
+     * @param name
+     * @param email
+     * @param password
+     * @param gender
+     * @param addressLine
+     * @param city
+     * @param state
+     * @param country
+     * @param avatar
+     * @param contact
+     * @return 1 if success, 0 if not
+     */
+    public int updateUser(String name, String email, String password, String gender,
+            String addressLine, String city, String state, String country, String contact, String avatar) {
+        int save = 0;
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = new DBContext().getConnection();
+            String sql = "UPDATE dbo.\"USER\" SET name = ?, password = ?"
+                    + ", gender = ?, addressline = ?, city = ?, state = ?, country = ?, contact = ?, avatar = ? WHERE"
+                    + " email = ?";
+
+            ps = con.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, password);
+            ps.setString(3, gender);
+            ps.setString(4, addressLine);
+            ps.setString(5, city);
+            ps.setString(6, state);
+            ps.setString(7, country);
+            ps.setString(8, contact);
+            ps.setString(9, avatar);
+            ps.setString(10, email);
             ps.executeUpdate();
             save = 1;
         } catch (Exception ex) {
@@ -134,11 +194,12 @@ public class UserDAO {
         }
         return u;
     }
-    
+
     /**
      * Get all email can send of user login
+     *
      * @param email - Email of user
-     * @return list email to send 
+     * @return list email to send
      */
     public List<String> listEmailSend(String email) {
         List<String> listOfEmailToSend = new ArrayList<>();
@@ -172,6 +233,79 @@ public class UserDAO {
             }
         }
         return listOfEmailToSend;
+    }
+
+    /**
+     * Get path avatar of email
+     *
+     * @param email
+     * @return String path
+     */
+    public String getAvatarOfUser(String email) {
+        String path = "";
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = new DBContext().getConnection();
+            String sql = "SELECT avatar FROM dbo.\"USER\" WHERE email = ?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                path = rs.getString(1);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return path;
+    }
+    
+    public int updateAvatar(String avatar, String email) {
+        int save = 0;
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = new DBContext().getConnection();
+            String sql = "UPDATE dbo.\"USER\" SET avatar = ? WHERE email = ?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, avatar);
+            ps.setString(2, email);
+            ps.executeUpdate();
+            save = 1;
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.closeOnCompletion();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return save;
     }
 
 }

@@ -16,7 +16,7 @@
         <a href="inbox">inbox</a> |
         <a href="compose">Compose Mail</a> |
         <a href="sent">Sent Mail</a> |
-        <a href="trashservlet">Trash</a> |
+        <a href="trash">Trash</a> |
         <a href="logout">Logout</a>
         <hr/>
     </body>

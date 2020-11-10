@@ -79,7 +79,7 @@ public class MessageDAO {
         PreparedStatement ps = null;
         try {
             con = new DBContext().getConnection();
-            String sql = "SELECT * FROM dbo.\"Message\" WHERE receiver = ? trash != '1'";
+            String sql = "SELECT * FROM dbo.\"Message\" WHERE receiver = ? and trash = 'NO'";
             ps = con.prepareStatement(sql);
             ps.setString(1, emailReceiver);
             ResultSet rs = ps.executeQuery();
@@ -127,7 +127,7 @@ public class MessageDAO {
         PreparedStatement ps = null;
         try {
             con = new DBContext().getConnection();
-            String sql = "SELECT * FROM dbo.\"Message\" WHERE sender = ? and trash != '1'";
+            String sql = "SELECT * FROM dbo.\"Message\" WHERE sender = ? and trash = 'NO'";
             ps = con.prepareStatement(sql);
             ps.setString(1, emailSent);
             ResultSet rs = ps.executeQuery();
@@ -162,9 +162,46 @@ public class MessageDAO {
         }
         return listSentOfEmail;
     }
-    
+
+    /**
+     * Move message to trash
+     *
+     * @param id
+     * @param email
+     */
+    public void updateTrashMessage(int id, String email) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = new DBContext().getConnection();
+            String sql = "UPDATE dbo.\"Message\" SET trash = ? WHERE id = ?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(MessageDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MessageDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MessageDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
     /**
      * Get all trash message of email
+     *
      * @param email
      * @return list trash message
      */
@@ -174,7 +211,7 @@ public class MessageDAO {
         PreparedStatement ps = null;
         try {
             con = new DBContext().getConnection();
-            String sql = "SELECT * FROM dbo.\"Message\" WHERE sender = ? and trash = '1'";
+            String sql = "SELECT * FROM dbo.\"Message\" WHERE trash = ?";
             ps = con.prepareStatement(sql);
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
@@ -255,6 +292,74 @@ public class MessageDAO {
             }
         }
         return mess;
+    }
+
+    /**
+     * Recover message
+     *
+     * @param id
+     */
+    public void recoverMessage(int id) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = new DBContext().getConnection();
+            String sql = "UPDATE dbo.\"Message\" SET trash='NO' WHERE id = ?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(MessageDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MessageDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MessageDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    /**
+     * Delete message with id
+     *
+     * @param id
+     */
+    public void deleteMessage(int id) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = new DBContext().getConnection();
+            String sql = "DELETE FROM dbo.\"Message\" WHERE id = ?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(MessageDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MessageDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MessageDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 
 }

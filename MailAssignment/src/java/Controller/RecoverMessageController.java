@@ -9,8 +9,10 @@ import DAL.MessageDAO;
 import Model.Message;
 import Model.User;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +22,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author tuann
  */
-public class InboxController extends HttpServlet {
+@WebServlet(name = "RecoverMessageController", urlPatterns = {"/recovermessage"})
+public class RecoverMessageController extends HttpServlet {
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -38,11 +41,11 @@ public class InboxController extends HttpServlet {
         User u = (User) session.getAttribute("user");
         if (u != null) {
 
-            //Get list of inbox of user
-            List<Message> listOfInbox = new MessageDAO().listInboxOfEmail(u.getEmail());
-            request.setAttribute("listofinbox", listOfInbox);
-            //Forward to inbox.jsp
-            request.getRequestDispatcher("inbox.jsp").forward(request, response);
+            //Get message's id
+            int id = Integer.parseInt(request.getParameter("id"));
+
+            new MessageDAO().recoverMessage(id);
+            response.sendRedirect("trash");
         } else {
             response.sendRedirect("login");
         }
@@ -56,20 +59,4 @@ public class InboxController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

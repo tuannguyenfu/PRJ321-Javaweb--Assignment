@@ -36,8 +36,8 @@ public class LogoutController extends HttpServlet {
         //If session is valid
         if (u != null) {
             session.invalidate();
-            response.sendRedirect("login");
         }
+        response.sendRedirect("login");
 
     }
 }

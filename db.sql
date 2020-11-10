@@ -29,4 +29,5 @@ CREATE TABLE  "MESSAGE"
    );
 
 
-   SELECT * FROM dbo."USER"
+  ALTER TABLE dbo."USER"
+ADD avatar varchar(200) DEFAULT 'uploadavatar/default.png'

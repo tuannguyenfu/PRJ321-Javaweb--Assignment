@@ -5,17 +5,19 @@
 --%>
 
 <%@page import="Model.User"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
     <style>
         h2 {
             background-color: blue;
             color: white;
+            text-align: center;
         }
         h3 {
             background-color: orange;
             color: white;
+            text-align: center;
         }
     </style>
     <head>
@@ -25,14 +27,14 @@
         <% 
             String welcome = "";
             session = request.getSession();
-            User u = (User) session.getAttribute("user");
-            if (u != null) {
-                welcome = u.getName();
+            User user = (User) session.getAttribute("user");
+            if (user != null) {
+                welcome = user.getName();
             }
         %>
     </head>
     <body>
         <h2>FPTU Mail Manager</h2>
-        <h3>Main Page <%=welcome%></h3>
+        <h3>Main Page <a href="user"><%=welcome%></a></h3>
     </body>
 </html>
