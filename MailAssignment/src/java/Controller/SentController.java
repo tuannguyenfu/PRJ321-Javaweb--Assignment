@@ -38,7 +38,6 @@ public class SentController extends HttpServlet {
         //Use session to get User login
         User u = (User) session.getAttribute("user");
         if (u != null) {
-
             //Get list of inbox of user
             List<Message> listOfSentMessage = new MessageDAO().listSentOfEmail(u.getEmail());
             request.setAttribute("listofsent", listOfSentMessage);

@@ -6,42 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<style>
-    .inputform {
-        float: left;
-        width: 400px;
-        border: 1px solid black;
-        border-radius: 10px;
-        padding: 10px;
-    }
 
-    #submit{
-        margin-left:97px;
-        margin-right: 15px;
-        width: 80px;
-    }
-
-    #reset {
-        width: 80px;
-    }
-
-    #login {
-        width: 80px;
-    }
-
-    .design {
-        padding-left: 10px;
-    }
-
-    h2 {
-        background-color: blue;
-        color: white;
-    }
-    h3 {
-        background-color: orange;
-        color: white;
-    }
-</style>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

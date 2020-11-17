@@ -22,6 +22,53 @@ import java.util.logging.Logger;
  */
 public class UserDAO {
 
+    public List<User> getAll() {
+        Connection con = null;
+        PreparedStatement ps = null;
+        List<User> listOfUser = new ArrayList<>();
+        try {
+            con = new DBContext().getConnection();
+            String sql = "SElECT * FROM dbo.\"USER\" WHERE isadmin = 0";
+            ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                User u = new User();
+                u.setId(rs.getInt("id"));
+                u.setName(rs.getString("name"));
+                u.setEmail(rs.getString("email"));
+                u.setPassword(rs.getString("password"));
+                u.setGender(rs.getString("gender"));
+                u.setDob(rs.getDate("dob"));
+                u.setAddressLine(rs.getString("addressline"));
+                u.setCity(rs.getString("city"));
+                u.setState(rs.getString("state"));
+                u.setCountry(rs.getString("country"));
+                u.setContact(rs.getString("contact"));
+                u.setRegisterDate(rs.getDate("registereddate"));
+                u.setAvatar(rs.getString("avatar"));
+                listOfUser.add(u);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return listOfUser;
+    }
+
     /**
      * INSERT USER INTO DATABASE
      *
@@ -81,9 +128,10 @@ public class UserDAO {
         }
         return save;
     }
-    
+
     /**
      * Update info of user to DB
+     *
      * @param name
      * @param email
      * @param password
@@ -106,7 +154,6 @@ public class UserDAO {
             String sql = "UPDATE dbo.\"USER\" SET name = ?, password = ?"
                     + ", gender = ?, addressline = ?, city = ?, state = ?, country = ?, contact = ?, avatar = ? WHERE"
                     + " email = ?";
-
             ps = con.prepareStatement(sql);
             ps.setString(1, name);
             ps.setString(2, password);
@@ -173,6 +220,8 @@ public class UserDAO {
                 u.setCountry(rs.getString("country"));
                 u.setContact(rs.getString("contact"));
                 u.setRegisterDate(rs.getDate("registereddate"));
+                u.setAvatar(rs.getString("avatar"));
+                u.setIsAdmin(rs.getInt("isAdmin"));
             }
         } catch (Exception ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -274,7 +323,13 @@ public class UserDAO {
         }
         return path;
     }
-    
+
+    /**
+     *
+     * @param avatar
+     * @param email
+     * @return
+     */
     public int updateAvatar(String avatar, String email) {
         int save = 0;
         Connection con = null;
@@ -308,4 +363,72 @@ public class UserDAO {
         return save;
     }
 
+    /**
+     * Delete use with id 
+     * @param id
+     * @return 1 if success, 0 if not
+     */
+    public int deleteUser(int id) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        int save = 0;
+        try {
+            con = new DBContext().getConnection();
+            String sql = "DELETE FROM dbo.\"User\" WHERE id = ?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            save = 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return save;
+    }
+
+    public int resetPasswordUser(int id) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        int save = 0;
+        try {
+            con = new DBContext().getConnection();
+            String sql = "UPDATE dbo.\"User\" SET password = 123456 WHERE id = ?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            save = 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return save;
+    }
 }

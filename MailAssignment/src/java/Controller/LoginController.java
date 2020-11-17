@@ -22,7 +22,6 @@ import javax.servlet.http.HttpSession;
  */
 public class LoginController extends HttpServlet {
 
-  
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -38,7 +37,12 @@ public class LoginController extends HttpServlet {
         User u = (User) session.getAttribute("user");
         //If session is valid
         if (u != null) {
-            response.sendRedirect("inbox");
+            if (u.getIsAdmin() == 0) {
+                response.sendRedirect("inbox");
+            }
+            if (u.getIsAdmin() == 1) {
+                response.sendRedirect("admin");
+            }
         } else { //Check cookie
             String email = "";
             String password = "";
@@ -93,11 +97,8 @@ public class LoginController extends HttpServlet {
                 response.addCookie(c_user);
                 response.addCookie(c_pass);
             }
-
-            response.sendRedirect("inbox");
-        } else {
-            response.sendRedirect("index.jsp");
         }
+        response.sendRedirect("login");
     }
 
     /**

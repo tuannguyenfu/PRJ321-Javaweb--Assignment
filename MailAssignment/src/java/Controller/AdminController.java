@@ -5,8 +5,7 @@
  */
 package Controller;
 
-import DAL.MessageDAO;
-import Model.Message;
+import DAL.UserDAO;
 import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author tuann
  */
-public class TrashController extends HttpServlet {
+public class AdminController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +39,10 @@ public class TrashController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet TrashController</title>");            
+            out.println("<title>Servlet AdminController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet TrashController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AdminController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,12 +61,34 @@ public class TrashController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        User u =(User) session.getAttribute("user");
+        User u = (User) session.getAttribute("user");
+        //If session is valid
         if (u != null) {
-            List<Message> listOfTrash = new MessageDAO().getTrashMessage(u.getEmail());
-            request.setAttribute("listtrash", listOfTrash);
-            request.getRequestDispatcher("trash.jsp").forward(request, response);
+            if (request.getParameter("option") != null) {
+                String option = request.getParameter("option");
+                int id = Integer.parseInt(request.getParameter("id"));
+                handleMethod(option, id);
+                response.sendRedirect("login");
+                return;
+            }
+            List<User> listOfUser = new UserDAO().getAll();
+            System.out.println("Size: " + listOfUser.size());
+            request.setAttribute("listUser", listOfUser);
+            request.getRequestDispatcher("admin.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("login");
         }
+    }
+
+    public int handleMethod(String option, int id) {
+        int save = 0;
+        if (option.equalsIgnoreCase("reset")) {
+            save = new UserDAO().resetPasswordUser(id);
+        }
+        if (option.equalsIgnoreCase("delete")) {
+            save = new UserDAO().deleteUser(id);
+        }
+        return save;
     }
 
     /**
@@ -81,7 +102,7 @@ public class TrashController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /**

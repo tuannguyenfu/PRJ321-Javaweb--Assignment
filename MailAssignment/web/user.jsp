@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-
+        ]
         <%
             User u = (User) request.getAttribute("user");
         %>
@@ -24,7 +24,7 @@
             <%@include file="link.jsp" %>
         </div>
 
-        <img width="120px" height="80px" src="uploadavatar/default.png" alt="your avatar">
+        <img width="120px" height="80px" src="<%=u.getAvatar()%>" alt="your avatar">
         <form action="updateinfo" method="POST" enctype="multipart/form-data">
             <input type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" name="photo" value="Upload avatar"/>
 
@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <th>Email: </th>
-                    <td><input type="text" value="<%=u.getEmail()%>" name="email" readonly/></td>
+                    <td><input type="email" value="<%=u.getEmail()%>" name="email" readonly/></td>
                 </tr>
                 <tr>
                     <th>Password: </th>
@@ -52,30 +52,30 @@
                 </tr>
                 <tr>
                     <th>Address: </th>
-                    <td><input type="text" value="<%=u.getAddressLine()%>" name="addressline"></td>
+                    <td><input type="text" value="<%=u.getAddressLine()%>" name="addressline"/></td>
                 </tr>
                 <tr>
                     <th>City: </th>
-                    <td><input type="text" value="<%=u.getCity()%>" name="city"></td>
+                    <td><input type="text" value="<%=u.getCity()%>" name="city"/></td>
                 </tr>
                 <tr>
                     <th>State: </th>
-                    <td><input type="text" value="<%=u.getState()%>" name="state"></td>
+                    <td><input type="text" value="<%=u.getState()%>" name="state"/></td>
                 </tr>
                 <tr>
                     <th>Country: </th>
-                    <td><input type="text" value="<%=u.getCountry()%>" name="country"></td>
+                    <td><input type="text" value="<%=u.getCountry()%>" name="country"/></td>
                 </tr>
                 <tr>
-                    <th>Contact: </th>
-                    <td><input type="text" value="<%=u.getContact()%>" name="contact"></td>
+                    <th>Phone: </th>
+                    <td><input type="text" value="<%=u.getContact()%>" name="contact"/></td>
                 </tr>
                 <tr>
                     <th>RegisteredDate: </th>
-                    <td><%=u.getRegisterDate()%></td>
+                    <td><input type="date" value="<%=u.getRegisterDate()%>" readonly/></td>
                 </tr>
             </table>
-                <input type="submit" value="Save">
+            <input type="submit" value="Save">
         </form>
 
         <!-- Footer -->

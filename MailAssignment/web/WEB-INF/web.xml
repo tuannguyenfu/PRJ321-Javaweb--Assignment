@@ -37,16 +37,20 @@
         <servlet-class>Controller.LogoutController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>TrashController</servlet-name>
-        <servlet-class>Controller.TrashController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>UserController</servlet-name>
         <servlet-class>Controller.UserController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UpdateInfoController</servlet-name>
         <servlet-class>Controller.UpdateInfoController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminController</servlet-name>
+        <servlet-class>Controller.AdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TrashController</servlet-name>
+        <servlet-class>Controller.TrashController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>test</servlet-name>
@@ -81,16 +85,20 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>TrashController</servlet-name>
-        <url-pattern>/trash</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/user</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UpdateInfoController</servlet-name>
         <url-pattern>/updateinfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminController</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TrashController</servlet-name>
+        <url-pattern>/trash</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

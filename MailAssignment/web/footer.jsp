@@ -12,6 +12,6 @@
         <title>footer</title>
     </head>
     <body>
-        <p style="width: 100%; position: fixed; left:0; bottom: 0;background-color: green; color:white; text-align: center; ">PRJ321 - TuanNTSE04733</p>
+        <p style="width: 100%; position: fixed; left: 0; bottom: 0;background-color: green; color:white; text-align: center; ">PRJ321 - TuanNTSE04733</p>
     </body>
 </html>

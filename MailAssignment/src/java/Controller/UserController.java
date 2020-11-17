@@ -6,6 +6,7 @@
 package Controller;
 
 import DAL.MessageDAO;
+import DAL.UserDAO;
 import Model.Message;
 import Model.User;
 import java.io.IOException;
@@ -38,6 +39,7 @@ public class UserController extends HttpServlet {
         //Use session to get User login
         User u = (User) session.getAttribute("user");
         if (u != null) {
+            u.setAvatar(new UserDAO().getAvatarOfUser(u.getEmail()));
             request.setAttribute("user", u);
             request.getRequestDispatcher("user.jsp").forward(request, response);
         } else {

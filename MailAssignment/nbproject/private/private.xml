@@ -12,8 +12,9 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/tuann/GIT/prj321-assignment/MailAssignment/web/login.jsp</file>
-            <file>file:/C:/Users/tuann/GIT/prj321-assignment/MailAssignment/web/register.jsp</file>
+            <file>file:/C:/Users/tuann/GIT/prj321-assignment/MailAssignment/web/admin.jsp</file>
+            <file>file:/C:/Users/tuann/GIT/prj321-assignment/MailAssignment/src/java/DAL/UserDAO.java</file>
+            <file>file:/C:/Users/tuann/GIT/prj321-assignment/MailAssignment/src/java/Controller/AdminController.java</file>
         </group>
     </open-files>
 </project-private>

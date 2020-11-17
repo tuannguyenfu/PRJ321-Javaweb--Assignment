@@ -25,6 +25,8 @@ public class User {
     private String country;
     private String contact;
     private Date registerDate;
+    private String avatar;
+    private int isAdmin;
 
     public User() {
     }
@@ -138,6 +140,22 @@ public class User {
 
     public void setRegisterDate(Date registerDate) {
         this.registerDate = registerDate;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public int getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(int isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
 }
